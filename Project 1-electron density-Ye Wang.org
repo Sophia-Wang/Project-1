@@ -1,0 +1,44 @@
+* Project 1-Ye Wang
+
+#+begin_src python
+import numpy as np
+from mayavi import mlab
+
+mlab.figure(1, bgcolor=(0, 0, 0), size=(600, 600))
+mlab.clf()
+
+atoms_x = np.array([4.42, 5.58])*96/10
+atoms_y = np.array([5.00, 5.00])*96/10
+atoms_z = np.array([5.00, 5.00])*96/10
+
+C = mlab.points3d(atoms_x[:1], atoms_y[:1], atoms_z[:1],
+                  scale_factor=3,
+                  resolution=20,
+                  color=(1, 0, 0),
+                  scale_mode='none')
+
+O = mlab.points3d(atoms_x[-1:], atoms_y[-1:], atoms_z[-1:],
+                   scale_factor=2,
+                   resolution=20,
+                   color=(1, 1, 1),
+                   scale_mode='none')
+
+mlab.plot3d(atoms_x, atoms_y, atoms_z, [0, 0],
+            tube_radius=0.3, colormap='Reds')
+
+str = ' '.join(file('molecules/co-centered/CHG').readlines()[12:])
+data = np.fromstring(str, sep=' ')
+data.shape = (96, 96, 96)
+
+source = mlab.pipeline.scalar_field(data.T)
+min = data.min()
+max = data.max()
+vol = mlab.pipeline.volume(source, vmin=min,vmax=max)
+
+
+mlab.view(azimuth=None, elevation=None, distance=None, focalpoint=None,roll=None, reset_roll=True, figure=None)
+mlab.savefig('images/co-electron density-fog.png')
+mlab.show()
+#+end_src
+
+#+RESULTS:

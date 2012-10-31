@@ -1,0 +1,17 @@
+Mini-project 1-Readme
+Ye Wang
+
+What is my project about?
+I used 'CO' as an example to figure out how to plot the electron density as a 'fog' rather with isosurfaces. I also plot the atomic geometry in it to see the electron cloud around the atom positions.
+
+How to use your code?
+To use my code, the centered position, CHG or CHGCAR file should be get.
+
+The steps are as follows:
+1 Calculate the centered position of atom or molecule by DFT.
+Through DFT calculation, get the CHG and CHGCAR file of the centered atom or molecule.   CHG and CHGCAR include a grid of electron density values and the value of NGX, NGY, NGZ.
+2 Then, open a new file and input the the position of centered atom or molecule and plot the atom or molecule by using 'mlab.points3d'.
+3 Plot the bond between the atoms by using 'mlab.plot3d'.
+4 Input the electron density data from CHG or CHGCAR file (I used CHG file). Read lines of electron density data. Form a new 3-D array which is the same dimension as that of electron density grid in CHG or CHGCAR.
+5 Visualize volumetric scalar data of electron density. As 'data.shape' probably transposes the 'data' array. So use the 'data.T' to visualize the electron density.
+6 Get the final electron density figure.

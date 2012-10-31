@@ -1,0 +1,29 @@
+* project 1-Ye Wang
+
+#+begin_src python
+from jasp import *
+from ase import Atom, Atoms
+
+atoms = Atoms([Atom('C', [2.422, 0.0, 0.0]),
+               Atom('O', [3.578, 0.0, 0.0])],
+               cell=(10,10,10))
+
+atoms.center()
+with jasp('molecules/co-centered',
+           encut=350,
+           xc='PBE',
+           atoms=atoms) as calc:
+     atoms = calc.get_atoms()
+
+     x, y, z, cd = calc.get_charge_density()
+for i, atom in enumerate(atoms):
+   print '{0:3d}{1:^4s}{2:-8.2f}{3:-8.2f}{4:-8.2f}'.format(i,
+                                                        atom.symbol,
+                                                        atom.x,
+                                                        atom.y,
+                                                        atom.z)
+#+end_src
+
+#+RESULTS:
+:   0 C      4.42    5.00    5.00
+:   1 O      5.58    5.00    5.00
